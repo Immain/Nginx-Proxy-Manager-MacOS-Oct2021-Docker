@@ -1,0 +1,27 @@
+# Nginx Proxy Manager (MacOS)
+version: '3'
+services:
+  app:
+    image: 'jlesage/nginx-proxy-manager' # Keep
+    ports:
+      - '80:80' # Keep !Important
+      - '81:81' # Keep !Important
+      - '443:443' # Keep !Important
+    environment:
+      DB_MYSQL_HOST: "proxy_db" # Keep !Important
+      DB_MYSQL_PORT: 3306 # Keep !Important
+      DB_MYSQL_USER: "npm" # Change
+      DB_MYSQL_PASSWORD: "npm" # Change
+      DB_MYSQL_NAME: "npm"
+    volumes:
+      - /Users/Example/Documents/ProxyManager/data # Change to match your Mac User
+      - /Users/User/Documents/ProxyManager/letsencrypt # Change to match your Mac User
+  db:
+    image: 'mariadb'
+    environment:
+      MYSQL_ROOT_PASSWORD: "npm" # Change
+      MYSQL_DATABASE: "Proxy_db" # Keep !Important
+      MYSQL_USER: "npm" # Change
+      MYSQL_PASSWORD: "npm" # Change
+    volumes:
+      - /Users/Example/Documents/ProxyManager/letsencrypt/mysql # Change to match your Mac User
